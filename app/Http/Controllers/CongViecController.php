@@ -7,59 +7,25 @@ use Illuminate\Http\Request;
 
 class CongViecController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function layData(){
+        $data = CongViec::select('id','ten_cong_viec','tinh_trang')->get();
+        return response()->json([
+            'list' => $data,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function taoData(Request $request){
+        // dd($request->all());//Khi click nut them moi -> vào root api-tao-cong-viec thi no se tra ve cac data duoc them moi
+        //nghia la $request->all() : lấy all data trả về , ta có thể sài $request->data để lấy data của cột đó
+        // dd($request->ten_cong_viec);
+        CongViec::create([
+             'ten_cong_viec' => $request->ten_cong_viec,// Nghĩa là ở cột ten_cong_viec sẽ lấy data của thằng được mình thêm vào thông qua yêu cầu request
+             'tinh_trang' => $request->tinh_trang,
+
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(CongViec $congViec)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CongViec $congViec)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, CongViec $congViec)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(CongViec $congViec)
-    {
-        //
+    public function updateData(){
+        
     }
 }
